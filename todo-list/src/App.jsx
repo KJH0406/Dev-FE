@@ -2,6 +2,7 @@ import { useState } from "react"
 import Editor from "./components/Editor"
 import Header from "./components/Header"
 import List from "./components/List"
+import UseReducerTest from "./components/UseReducerTest"
 import "./App.css"
 import { v4 as uuidv4 } from "uuid"
 
@@ -60,9 +61,10 @@ function App() {
 
   return (
     <div className="App">
-      <Header />
+      {/* <Header />
       <Editor onCreate={onCreate} />
-      <List todos={todos} onUpdate={onUpdate} onDelete={onDelete} />
+      <List todos={todos} onUpdate={onUpdate} onDelete={onDelete} /> */}
+      <UseReducerTest />
     </div>
   )
 }
