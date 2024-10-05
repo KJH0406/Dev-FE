@@ -1,8 +1,9 @@
+import { useRef } from "react"
 import { useState } from "react"
 
 const Register = () => {
   const [formData, setFormData] = useState({
-    name: "이름",
+    name: "",
     birth: "",
     country: "",
     bio: "",
@@ -16,10 +17,20 @@ const Register = () => {
     }))
   }
 
+  const refObj = useRef()
+  const inputRef = useRef()
+
+  const onSubmit = () => {
+    if (formData.name === "") {
+      inputRef.current.focus()
+    }
+  }
+
   return (
     <div>
       <div>
         <input
+          ref={inputRef}
           name="name"
           value={formData.name}
           onChange={handleChange}
@@ -48,6 +59,8 @@ const Register = () => {
       <div>
         <textarea name="bio" value={formData.bio} onChange={handleChange} />
       </div>
+
+      <button onClick={onSubmit}>제출</button>
     </div>
   )
 }
