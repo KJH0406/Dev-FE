@@ -1,12 +1,12 @@
 import "./App.css"
-import Button from "./components/Button"
+import Bulb from "./components/Bulb"
+import Counter from "./components/Counter"
 
 function App() {
   return (
     <>
-      <Button text={"메일"} />
-      <Button text={"카페"} />
-      <Button text={"블로그"} />
+      <Bulb />
+      <Counter />
     </>
   )
 }
