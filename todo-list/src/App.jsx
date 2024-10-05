@@ -2,9 +2,9 @@ import { useState } from "react"
 import Editor from "./components/Editor"
 import Header from "./components/Header"
 import List from "./components/List"
-import UseReducerTest from "./components/UseReducerTest"
 import "./App.css"
 import { v4 as uuidv4 } from "uuid"
+import { useReducer } from "react"
 
 // 더미 데이터
 const dummyData = [
@@ -21,50 +21,64 @@ const dummyData = [
     date: new Date().getTime(),
   },
 ]
+
+const CREATE = "CREATE"
+const UPDATE = "UPDATE"
+const DELETE = "DELETE"
+
+const reducer = (state, action) => {
+  switch (action.type) {
+    case CREATE:
+      return [action.data, ...state]
+    case UPDATE:
+      return state.map((item) =>
+        item.id === action.targetId ? { ...item, isDone: !item.isDone } : item
+      )
+    case DELETE:
+      return state.filter((item) => item.id !== action.targetId)
+    default:
+      return state
+  }
+}
+
 function App() {
   // todo 배열
-  const [todos, setTodos] = useState(dummyData)
+  const [todos, dispatch] = useReducer(reducer, dummyData)
 
   // todo 생성 함수
   const onCreate = (content) => {
-    const newTodo = {
-      id: uuidv4(),
-      isDone: false,
-      content: content,
-      date: new Date().getTime(),
-    }
-
-    setTodos([newTodo, ...todos])
+    dispatch({
+      type: CREATE,
+      data: {
+        id: uuidv4(),
+        isDone: false,
+        content: content,
+        date: new Date().getTime(),
+      },
+    })
   }
 
   // todo 업데이트 함수(checkbox)
   const onUpdate = (targetId) => {
-    setTodos(
-      todos.map((todo) => {
-        if (todo.id === targetId) {
-          return {
-            ...todo,
-            isDone: !todo.isDone,
-          }
-        }
-        return todo
-      })
-    )
+    dispatch({
+      type: UPDATE,
+      targetId: targetId,
+    })
   }
 
   // todo 삭제 함수
   const onDelete = (targetId) => {
-    const filtered = todos.filter((todo) => todo.id !== targetId)
-
-    setTodos(filtered)
+    dispatch({
+      type: DELETE,
+      targetId: targetId,
+    })
   }
 
   return (
     <div className="App">
-      {/* <Header />
+      <Header />
       <Editor onCreate={onCreate} />
-      <List todos={todos} onUpdate={onUpdate} onDelete={onDelete} /> */}
-      <UseReducerTest />
+      <List todos={todos} onUpdate={onUpdate} onDelete={onDelete} />
     </div>
   )
 }
