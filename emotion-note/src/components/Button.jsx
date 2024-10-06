@@ -2,9 +2,9 @@ import "../styles/Button.css"
 
 const Button = ({ text, type, onClick }) => {
   return (
-    <div className={`Button Button_${type}`} onClick={onClick}>
+    <button className={`Button Button_${type}`} onClick={onClick}>
       {text}
-    </div>
+    </button>
   )
 }
 
