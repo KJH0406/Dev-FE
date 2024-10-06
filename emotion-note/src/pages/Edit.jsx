@@ -11,8 +11,10 @@ import Editor from "../components/Editor"
 
 // custom hooks
 import useDiary from "../hooks/useDiary"
+import usePageTitle from "../hooks/usePageTitle"
 
 const Edit = () => {
+  usePageTitle("일기 수정하기")
   const params = useParams()
   const nav = useNavigate()
   const { onUpdate, onDelete } = useContext(DiaryDispatchContext)

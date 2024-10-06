@@ -8,8 +8,10 @@ import Viewer from "../components/Viewer"
 // custom hooks
 import useDiary from "../hooks/useDiary"
 import getStringedDate from "../util/get-stringed-date"
+import usePageTitle from "../hooks/usePageTitle"
 
 const Diary = () => {
+  usePageTitle("일기 펼쳐보기")
   const params = useParams()
   const nav = useNavigate()
 

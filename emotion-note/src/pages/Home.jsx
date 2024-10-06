@@ -10,6 +10,7 @@ import DiaryList from "../components/DiaryList"
 
 // css
 import "../styles/Home.css"
+import usePageTitle from "../hooks/usePageTitle"
 
 // 월별 일기 데이터 필터링
 const getMonthlyData = (flagDate, data) => {
@@ -37,6 +38,8 @@ const getMonthlyData = (flagDate, data) => {
 }
 
 const Home = () => {
+  usePageTitle("감정 일기장")
+
   // 일기 데이터
   const data = useContext(DiaryStateContext)
 
