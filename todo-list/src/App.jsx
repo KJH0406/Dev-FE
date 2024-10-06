@@ -5,6 +5,7 @@ import List from "./components/List"
 import "./App.css"
 import { v4 as uuidv4 } from "uuid"
 import { useReducer } from "react"
+import { createContext } from "react"
 
 // 더미 데이터
 const dummyData = [
@@ -40,6 +41,8 @@ const reducer = (state, action) => {
       return state
   }
 }
+
+export const TodoContext = createContext()
 
 function App() {
   // todo 배열
@@ -77,8 +80,10 @@ function App() {
   return (
     <div className="App">
       <Header />
-      <Editor onCreate={onCreate} />
-      <List todos={todos} onUpdate={onUpdate} onDelete={onDelete} />
+      <TodoContext.Provider value={{ todos, onCreate, onDelete, onUpdate }}>
+        <Editor />
+        <List />
+      </TodoContext.Provider>
     </div>
   )
 }

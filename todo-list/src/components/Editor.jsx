@@ -1,8 +1,13 @@
 import "../styles/Editor.css"
 import useInput from "../hooks/useInput"
 import { useRef } from "react"
+import { useContext } from "react"
+import { TodoContext } from "../App"
 
-const Editor = ({ onCreate }) => {
+const Editor = () => {
+  // context로 상태 관리
+  const { onCreate } = useContext(TodoContext)
+
   const [content, handleContentChange, setContent] = useInput("")
   const inputRef = useRef("")
 
