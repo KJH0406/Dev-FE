@@ -22,7 +22,8 @@ function App() {
         <Route path="/" element={<Home />}>
           home
         </Route>
-        <Route path="diary" element={<Diary />}>
+        {/* URL Parameter(:id)활용하여 동적 라우팅 */}
+        <Route path="diary/:id" element={<Diary />}>
           diary
         </Route>
         <Route path="new" element={<New />}>
