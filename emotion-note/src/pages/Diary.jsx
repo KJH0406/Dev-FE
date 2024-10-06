@@ -1,6 +1,8 @@
 import { useParams } from "react-router-dom"
-import Button from "../components/Button"
+
+// components
 import Header from "../components/Header"
+import Button from "../components/Button"
 import Viewer from "../components/Viewer"
 
 const Diary = () => {

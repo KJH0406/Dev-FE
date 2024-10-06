@@ -1,37 +1,15 @@
-import { useRef, useState } from "react"
+import { useState, useEffect, useRef } from "react"
 import { useNavigate } from "react-router-dom"
 
 // components
 import Button from "./Button"
 import EmotionItem from "./EmotionItem"
 
+// util
+import { emotionList } from "../util/constants"
+
 // css
 import "../styles/Editor.css"
-import { useEffect } from "react"
-
-// 감정 목록
-const emotionList = [
-  {
-    emotionId: 1,
-    emotionName: "완전 좋음",
-  },
-  {
-    emotionId: 2,
-    emotionName: "좋음",
-  },
-  {
-    emotionId: 3,
-    emotionName: "그럭저럭",
-  },
-  {
-    emotionId: 4,
-    emotionName: "나쁨",
-  },
-  {
-    emotionId: 5,
-    emotionName: "완전 나쁨",
-  },
-]
 
 // 날짜 형식 변환(YYYY-MM-DD)
 const getStringedDate = (targetDate) => {
