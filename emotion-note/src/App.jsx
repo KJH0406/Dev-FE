@@ -1,31 +1,46 @@
-import "./App.css"
-import { Routes, Route, Link, useNavigate } from "react-router-dom"
+import { Routes, Route } from "react-router-dom"
+
+// pages
 import Home from "./pages/Home"
 import Diary from "./pages/Diary"
 import New from "./pages/New"
 import Notfound from "./pages/Notfound"
-import getEmotionImg from "./util/get-emotion-img"
+
+// components
+import Header from "./components/Header"
+import Button from "./components/Button"
+
+// css
+import "./App.css"
 
 function App() {
-  const nav = useNavigate()
-  const onClickButton = () => {
-    nav("/new")
-  }
   return (
     <>
-      <div>
-        <img src={getEmotionImg(1)} />
-        <img src={getEmotionImg(2)} />
-        <img src={getEmotionImg(3)} />
-        <img src={getEmotionImg(4)} />
-        <img src={getEmotionImg(5)} />
-      </div>
-      <div>
-        <Link to="/">Home</Link>
-        <Link to="/diary">Diary</Link>
-        <Link to="/new">New</Link>
-      </div>
-      <button onClick={onClickButton}>새로운 일기 생성</button>
+      <Header
+        title={"Header"}
+        leftChild={<Button text={"<"} />}
+        rightChild={<Button text={">"} />}
+      />
+      <Button
+        text={123}
+        onClick={() => {
+          console.log("hi")
+        }}
+      />
+      <Button
+        text={123}
+        type={"POSITIVE"}
+        onClick={() => {
+          console.log("hi")
+        }}
+      />
+      <Button
+        text={123}
+        type={"NAGATIVE"}
+        onClick={() => {
+          console.log("hi")
+        }}
+      />
       <Routes>
         <Route path="/" element={<Home />}>
           home
