@@ -6,6 +6,7 @@ import "./App.css"
 import { v4 as uuidv4 } from "uuid"
 import { useReducer } from "react"
 import { createContext } from "react"
+import { useMemo } from "react"
 
 // 더미 데이터
 const dummyData = [
@@ -42,7 +43,11 @@ const reducer = (state, action) => {
   }
 }
 
-export const TodoContext = createContext()
+// 상태 변화가 자주 일어나는 것(todos)
+export const TodoStateContext = createContext()
+
+// 상태 변화가 자주 일어나지 않은 것(onCreate, Update, Delete 함수 모음)
+export const TodoDispatchContext = createContext()
 
 function App() {
   // todo 배열
@@ -77,13 +82,19 @@ function App() {
     })
   }
 
+  const memoizedDispatch = useMemo(() => {
+    return { onCreate, onUpdate, onDelete }
+  }, [])
+
   return (
     <div className="App">
       <Header />
-      <TodoContext.Provider value={{ todos, onCreate, onDelete, onUpdate }}>
-        <Editor />
-        <List />
-      </TodoContext.Provider>
+      <TodoStateContext.Provider value={todos}>
+        <TodoDispatchContext.Provider value={memoizedDispatch}>
+          <Editor />
+          <List />
+        </TodoDispatchContext.Provider>
+      </TodoStateContext.Provider>
     </div>
   )
 }

@@ -1,11 +1,11 @@
 import { useContext } from "react"
 import { useState } from "react"
-import { TodoContext } from "../App"
+import { TodoStateContext } from "../App"
 import "../styles/List.css"
 import TodoItem from "./TodoItem"
 
 const List = () => {
-  const { todos } = useContext(TodoContext)
+  const todos = useContext(TodoStateContext)
 
   const [search, setSearch] = useState("")
 
