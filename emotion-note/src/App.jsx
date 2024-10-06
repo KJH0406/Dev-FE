@@ -12,48 +12,43 @@ import Notfound from "./pages/Notfound"
 
 // css
 import "./App.css"
-
-// 임시 데이터
-const dummyData = [
-  {
-    id: 1,
-    createdDate: new Date("2024-10-06").getTime(),
-    emotionId: 1,
-    content: "1번 일기 내용",
-  },
-  {
-    id: 2,
-    createdDate: new Date("2024-10-05").getTime(),
-    emotionId: 2,
-    content: "2번 일기 내용",
-  },
-  {
-    id: 3,
-    createdDate: new Date("2024-09-29").getTime(),
-    emotionId: 3,
-    content: "3번 일기 내용",
-  },
-]
+import { useEffect } from "react"
 
 // Reducer Type
 const CREATE = "CREATE"
 const UPDATE = "UPDATE"
 const DELETE = "DELETE"
+const INIT = "INIT"
 
 // Reducer
 function reducer(state, action) {
+  // localStorege에 저장
+  let nextState
   switch (action.type) {
-    case CREATE:
-      return [action.data, ...state]
-    case UPDATE:
-      return state.map((item) =>
+    case INIT: {
+      return action.data
+    }
+    case CREATE: {
+      nextState = [action.data, ...state]
+      break
+    }
+
+    case UPDATE: {
+      nextState = state.map((item) =>
         String(item.id) === String(action.data.id) ? action.data : item
       )
-    case DELETE:
-      return state.filter((item) => String(item.id) !== String(action.id))
+      break
+    }
+
+    case DELETE: {
+      nextState = state.filter((item) => String(item.id) !== String(action.id))
+      break
+    }
     default:
       return state
   }
+  localStorage.setItem("diary", JSON.stringify(nextState))
+  return nextState
 }
 
 // StateContext(상태의 변동성이 높은 것)
@@ -64,7 +59,19 @@ export const DiaryDispatchContext = createContext()
 
 function App() {
   // 일기 데이터
-  const [data, dispatch] = useReducer(reducer, dummyData)
+  const [data, dispatch] = useReducer(reducer, [])
+
+  useEffect(() => {
+    const storedData = localStorage.getItem("diary")
+    if (!storedData) {
+      return
+    }
+    const parsedData = JSON.parse(storedData)
+    dispatch({
+      type: INIT,
+      data: parsedData,
+    })
+  }, [])
 
   // 일기 추가
   const onCreate = (createdDate, emotionId, content) => {
