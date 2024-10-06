@@ -7,6 +7,7 @@ import EmotionItem from "./EmotionItem"
 
 // css
 import "../styles/Editor.css"
+import { useEffect } from "react"
 
 // 감정 목록
 const emotionList = [
@@ -48,8 +49,18 @@ const getStringedDate = (targetDate) => {
   return `${year}-${month}-${date}`
 }
 
-const Editor = ({ onSubmit }) => {
+const Editor = ({ initData, onSubmit }) => {
   const nav = useNavigate()
+
+  // 초기 데이터
+  useEffect(() => {
+    if (initData) {
+      setInput({
+        ...initData,
+        createdDate: new Date(Number(initData.createdDate)),
+      })
+    }
+  }, [initData])
 
   // 사용자 입력 데이터
   const [input, setInput] = useState({
@@ -79,7 +90,8 @@ const Editor = ({ onSubmit }) => {
   const onClickSubmitButton = () => {
     // 감정 선택 여부 확인
     if (input.emotionId === null) {
-      alert("오늘의 감정을 선택해주세요!")
+      const alertMessage = "오늘의 감정을 선택해주세요!"
+      window.alert(alertMessage)
       return
     }
     onSubmit(input)
