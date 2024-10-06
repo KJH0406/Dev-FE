@@ -1,4 +1,4 @@
-import { useReducer } from "react"
+import { useState, useEffect, useReducer } from "react"
 import { Routes, Route } from "react-router-dom"
 import { createContext } from "react"
 import { v4 as uuidv4 } from "uuid"
@@ -12,7 +12,6 @@ import Notfound from "./pages/Notfound"
 
 // css
 import "./App.css"
-import { useEffect } from "react"
 
 // Reducer Type
 const CREATE = "CREATE"
@@ -58,19 +57,24 @@ export const DiaryStateContext = createContext()
 export const DiaryDispatchContext = createContext()
 
 function App() {
+  // 로딩 상태 확인
+  const [isLoading, setIsLoading] = useState(true)
   // 일기 데이터
   const [data, dispatch] = useReducer(reducer, [])
 
   useEffect(() => {
     const storedData = localStorage.getItem("diary")
     if (!storedData) {
+      setIsLoading(false)
       return
     }
     const parsedData = JSON.parse(storedData)
+
     dispatch({
       type: INIT,
       data: parsedData,
     })
+    setIsLoading(false)
   }, [])
 
   // 일기 추가
@@ -105,6 +109,10 @@ function App() {
       type: DELETE,
       id,
     })
+  }
+
+  if (isLoading) {
+    return <div>데이터 로딩중 입니다 ...</div>
   }
   return (
     <>
