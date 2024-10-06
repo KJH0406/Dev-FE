@@ -1,36 +1,21 @@
-import { useState, useEffect, useContext } from "react"
-import { replace, useNavigate, useParams } from "react-router-dom"
+import { useContext } from "react"
+import { useNavigate, useParams } from "react-router-dom"
 
 // context
-import { DiaryDispatchContext, DiaryStateContext } from "../App"
+import { DiaryDispatchContext } from "../App"
 
 // componets
 import Header from "../components/Header"
 import Button from "../components/Button"
 import Editor from "../components/Editor"
+import useDiary from "../hooks/useDiary"
 
 const Edit = () => {
   const params = useParams()
   const nav = useNavigate()
-
-  // 일기 초기 데이터 및 변경 함수
-  const data = useContext(DiaryStateContext)
   const { onUpdate, onDelete } = useContext(DiaryDispatchContext)
 
-  const [currentDiaryItem, setCurrentDiaryItem] = useState()
-
-  useEffect(() => {
-    const currentDiaryItem = data.find(
-      (item) => String(item.id) === String(params.id)
-    )
-    if (!currentDiaryItem) {
-      const alertMessage = "존재하지 않는 페이지입니다."
-      window.alert(alertMessage)
-      nav("/", { replace: true })
-    }
-
-    setCurrentDiaryItem(currentDiaryItem)
-  }, [params.id, data])
+  const currentDiaryItem = useDiary(params.id)
 
   // 삭제 확인 및 처리
   const onClickDelete = () => {

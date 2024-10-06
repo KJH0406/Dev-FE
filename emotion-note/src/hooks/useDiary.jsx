@@ -1,8 +1,9 @@
 import { useContext, useEffect, useState } from "react"
+import { useNavigate } from "react-router-dom"
 import { DiaryStateContext } from "../App"
 
 // 현재 일기 데이터 불러오기
-const useDiary = () => {
+const useDiary = (id) => {
   const nav = useNavigate()
 
   const data = useContext(DiaryStateContext)

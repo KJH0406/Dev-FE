@@ -7,25 +7,10 @@ import EmotionItem from "./EmotionItem"
 
 // util
 import { emotionList } from "../util/constants"
+import getStringedDate from "../util/get-stringed-date"
 
 // css
 import "../styles/Editor.css"
-
-// 날짜 형식 변환(YYYY-MM-DD)
-const getStringedDate = (targetDate) => {
-  let year = targetDate.getFullYear()
-  let month = targetDate.getMonth() + 1
-  let date = targetDate.getDate()
-
-  if (month < 10) {
-    month = `0${month}`
-  }
-  if (date < 10) {
-    date = `0${date}`
-  }
-
-  return `${year}-${month}-${date}`
-}
 
 const Editor = ({ initData, onSubmit }) => {
   const nav = useNavigate()
