@@ -4,8 +4,9 @@ import EmotionItem from "./EmotionItem"
 
 // css
 import "../styles/Editor.css"
+import { useState } from "react"
 
-// 감정 표시 목록
+// 감정 목록
 const emotionList = [
   {
     emotionId: 1,
@@ -29,15 +30,38 @@ const emotionList = [
   },
 ]
 
+// 날짜 형식 변환(YYYY-MM-DD)
+const getStringedDate = (targetDate) => {
+  let year = targetDate.getFullYear()
+  let month = targetDate.getMonth() + 1
+  let date = targetDate.getDate()
+
+  if (month < 10) {
+    month = `0${month}`
+  }
+  if (date < 10) {
+    date = `0${date}`
+  }
+
+  return `${year}-${month}-${date}`
+}
+
 const Editor = () => {
   // 현재 선택된 오늘의 감정
   const selectedEmotionId = 1
+
+  // 사용자 입력 데이터
+  const [input, setInput] = useState({
+    createdDate: new Date(),
+    emotionId: 3,
+    content: "",
+  })
 
   return (
     <div className="Editor">
       <section className="date_section">
         <h4>오늘의 날짜</h4>
-        <input type="date" value={"2024-10-06"} />
+        <input type="date" value={getStringedDate(input.createdDate)} />
       </section>
       <section className="emotion_section">
         <h4>오늘의 감정</h4>
