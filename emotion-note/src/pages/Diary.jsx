@@ -13,12 +13,14 @@ const Diary = () => {
   const params = useParams()
   const nav = useNavigate()
 
+  // 현재 일기 데이터 호출
   const currentDiaryItem = useDiary(params.id)
 
   if (!currentDiaryItem) {
     return <div>일기 불러오는 중...</div>
   }
 
+  // 일기 데이터 구조 분해
   const { createdDate, emotionId, content } = currentDiaryItem
   const title = getStringedDate(new Date(createdDate))
   return (

@@ -17,6 +17,7 @@ const New = () => {
 
   const { onCreate } = useContext(DiaryDispatchContext)
 
+  // 새로운 일기 작성
   const onSubmit = (input) => {
     onCreate(input.createdDate.getTime(), input.emotionId, input.content)
     nav("/", { replace: true })

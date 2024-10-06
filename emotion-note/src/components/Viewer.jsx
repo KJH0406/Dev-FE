@@ -6,6 +6,7 @@ import { emotionList } from "../util/constants"
 import "../styles/Viewer.css"
 
 const Viewer = ({ emotionId, content }) => {
+  // 현재 일기 감정 데이터(이미지, 상태 메시지)
   const emotionItem = emotionList.find(
     (item) => String(item.emotionId) === String(emotionId)
   )

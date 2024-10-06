@@ -8,6 +8,8 @@ import { DiaryDispatchContext } from "../App"
 import Header from "../components/Header"
 import Button from "../components/Button"
 import Editor from "../components/Editor"
+
+// custom hooks
 import useDiary from "../hooks/useDiary"
 
 const Edit = () => {
@@ -15,6 +17,7 @@ const Edit = () => {
   const nav = useNavigate()
   const { onUpdate, onDelete } = useContext(DiaryDispatchContext)
 
+  // 현재 일기 데이터 호출
   const currentDiaryItem = useDiary(params.id)
 
   // 삭제 확인 및 처리
