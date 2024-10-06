@@ -47,9 +47,6 @@ const getStringedDate = (targetDate) => {
 }
 
 const Editor = () => {
-  // 현재 선택된 오늘의 감정
-  const selectedEmotionId = 1
-
   // 사용자 입력 데이터
   const [input, setInput] = useState({
     createdDate: new Date(),
@@ -57,11 +54,31 @@ const Editor = () => {
     content: "",
   })
 
+  // 입력 값 저장
+  const onChangeInput = (e) => {
+    let name = e.target.name
+    let value = e.target.value
+
+    if (name === "createdDate") {
+      value = new Date(value)
+    }
+
+    setInput({
+      ...input,
+      [name]: value,
+    })
+  }
+
   return (
     <div className="Editor">
       <section className="date_section">
         <h4>오늘의 날짜</h4>
-        <input type="date" value={getStringedDate(input.createdDate)} />
+        <input
+          name="createdDate"
+          onChange={onChangeInput}
+          type="date"
+          value={getStringedDate(input.createdDate)}
+        />
       </section>
       <section className="emotion_section">
         <h4>오늘의 감정</h4>
@@ -69,9 +86,17 @@ const Editor = () => {
           {emotionList.map((emotion) => {
             return (
               <EmotionItem
+                onClick={() => {
+                  onChangeInput({
+                    target: {
+                      name: "emotionId",
+                      value: emotion.emotionId,
+                    },
+                  })
+                }}
                 key={emotion.emotionId}
                 {...emotion}
-                isSelected={emotion.emotionId === selectedEmotionId}
+                isSelected={emotion.emotionId === input.emotionId}
               />
             )
           })}
