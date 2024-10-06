@@ -67,26 +67,26 @@ function App() {
   const [data, dispatch] = useReducer(reducer, dummyData)
 
   // 일기 추가
-  const onCreate = (createdDate, emtionId, content) => {
+  const onCreate = (createdDate, emotionId, content) => {
     dispatch({
       type: CREATE,
       data: {
         id: uuidv4(),
         createdDate,
-        emtionId,
+        emotionId,
         content,
       },
     })
   }
 
   // 일기 수정
-  const onUpdate = (id, createdDate, emtionId, content) => {
+  const onUpdate = (id, createdDate, emotionId, content) => {
     dispatch({
       type: UPDATE,
       data: {
         id,
         createdDate,
-        emtionId,
+        emotionId,
         content,
       },
     })

@@ -1,4 +1,8 @@
+import { useContext } from "react"
 import { useNavigate } from "react-router-dom"
+
+// context
+import { DiaryDispatchContext } from "../App"
 
 // components
 import Header from "../components/Header"
@@ -10,6 +14,13 @@ import "../styles/New.css"
 
 const New = () => {
   const nav = useNavigate()
+
+  const { onCreate } = useContext(DiaryDispatchContext)
+
+  const onSubmit = (input) => {
+    onCreate(input.createdDate.getTime(), input.emotionId, input.content)
+    nav("/", { replace: true })
+  }
 
   return (
     <div className="New">
@@ -24,7 +35,7 @@ const New = () => {
           />
         }
       />
-      <Editor />
+      <Editor onSubmit={onSubmit} />
     </div>
   )
 }

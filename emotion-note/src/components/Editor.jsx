@@ -1,10 +1,12 @@
+import { useRef, useState } from "react"
+import { useNavigate } from "react-router-dom"
+
 // components
 import Button from "./Button"
 import EmotionItem from "./EmotionItem"
 
 // css
 import "../styles/Editor.css"
-import { useState } from "react"
 
 // 감정 목록
 const emotionList = [
@@ -46,11 +48,13 @@ const getStringedDate = (targetDate) => {
   return `${year}-${month}-${date}`
 }
 
-const Editor = () => {
+const Editor = ({ onSubmit }) => {
+  const nav = useNavigate()
+
   // 사용자 입력 데이터
   const [input, setInput] = useState({
     createdDate: new Date(),
-    emotionId: 3,
+    emotionId: null,
     content: "",
   })
 
@@ -69,6 +73,18 @@ const Editor = () => {
     })
   }
 
+  const emotionListRef = useRef(null)
+
+  // 완료 버튼 (작성 완료 / 수정 완료)
+  const onClickSubmitButton = () => {
+    // 감정 선택 여부 확인
+    if (input.emotionId === null) {
+      alert("오늘의 감정을 선택해주세요!")
+      return
+    }
+    onSubmit(input)
+  }
+
   return (
     <div className="Editor">
       <section className="date_section">
@@ -82,7 +98,7 @@ const Editor = () => {
       </section>
       <section className="emotion_section">
         <h4>오늘의 감정</h4>
-        <div className="emotion_list_wrapper">
+        <div className="emotion_list_wrapper" ref={emotionListRef}>
           {emotionList.map((emotion) => {
             return (
               <EmotionItem
@@ -104,11 +120,25 @@ const Editor = () => {
       </section>
       <section className="content_section">
         <h4>오늘의 일기</h4>
-        <textarea placeholder="오늘은 어땠나요?"></textarea>
+        <textarea
+          name="content"
+          value={input.content}
+          onChange={onChangeInput}
+          placeholder="오늘은 어땠나요?"
+        ></textarea>
       </section>
       <div className="button_section">
-        <Button text={"취소하기"} />
-        <Button text={"작성완료"} type={"POSITIVE"} />
+        <Button
+          onClick={() => {
+            nav(-1)
+          }}
+          text={"취소하기"}
+        />
+        <Button
+          onClick={onClickSubmitButton}
+          text={"작성완료"}
+          type={"POSITIVE"}
+        />
       </div>
     </div>
   )
