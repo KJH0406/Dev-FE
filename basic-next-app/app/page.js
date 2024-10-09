@@ -1,20 +1,49 @@
 import Link from "next/link"
+import "@/styles/page.css"
 
 export default function Home() {
   return (
-    <main>
-      <h1 style={{ color: "white", textAlign: "center" }}>
-        Time to get started!
-      </h1>
-      <p>
-        <Link href="/meals">Meals Page</Link>
-      </p>
-      <p>
-        <Link href="/meals/share">Meals Share Page</Link>
-      </p>
-      <p>
-        <Link href="/community">Community Page</Link>
-      </p>
-    </main>
+    <>
+      <header className="header">
+        <div className="slideshow"></div>
+        <div>
+          <div className="hero">
+            <h1>요리 백과사전</h1>
+            <p>전 세계의 음식을 맛보고 공유하세요.</p>
+          </div>
+          <div className="cta">
+            <Link href="/community">커뮤니티에 참여하기</Link>
+            <Link href="/meals">음식 탐험하기</Link>
+          </div>
+        </div>
+      </header>
+      <main>
+        <section className="section">
+          <h2>어떻게 작동하나요?</h2>
+          <p>
+            음식 백과사전은 음식 애호가들이 그들의 좋아하는 레시피를 전 세계와
+            공유할 수 있는 플랫폼입니다. 새로운 요리를 발견하고, 다른 음식
+            애호가들과 소통할 수 있는 장소입니다.
+          </p>
+          <p>
+            음식 백과사전은 새로운 요리를 발견하고, 다른 음식 애호가들과 소통할
+            수 있는 장소입니다.
+          </p>
+        </section>
+
+        <section className="section">
+          <h2>왜 음식 백과사전 인가요?</h2>
+          <p>
+            음식 백과사전은 음식 애호가들이 그들의 좋아하는 레시피를 전 세계와
+            공유할 수 있는 플랫폼입니다. 새로운 요리를 발견하고, 다른 음식
+            애호가들과 소통할 수 있는 장소입니다.
+          </p>
+          <p>
+            음식 백과사전은 새로운 요리를 발견하고, 다른 음식 애호가들과 소통할
+            수 있는 장소입니다.
+          </p>
+        </section>
+      </main>
+    </>
   )
 }
