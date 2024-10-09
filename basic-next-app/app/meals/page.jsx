@@ -1,16 +1,24 @@
 import Link from "next/link"
+import MealsGrid from "@/components/meals/meals-grid"
+import styles from "@/styles/meals/meals-main.module.css"
 
 const MealsPage = () => {
   return (
-    <main>
-      <h1>Meals Main Page</h1>
-      <p>
-        <Link href="/meals/pizza-1">pizza-1</Link>
-      </p>
-      <p>
-        <Link href="/meals/pizza-2">pizza-2</Link>
-      </p>
-    </main>
+    <>
+      <header className={styles.header}>
+        <h1>
+          맛있는 음식, 만들어짐{" "}
+          <span className={styles.highlight}>만든 사람</span>
+        </h1>
+        <p>맛난거 선택하고 마음에 드는 레시피도 골라보세요!</p>
+        <p className={styles.cta}>
+          <Link href="/meals/share">레시피 공유하기!</Link>
+        </p>
+      </header>
+      <section className={styles.main}>
+        <MealsGrid meals={[]} />
+      </section>
+    </>
   )
 }
 
