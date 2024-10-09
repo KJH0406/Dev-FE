@@ -1,6 +1,6 @@
 import Link from "next/link"
 import styles from "@/styles/page.module.css"
-import SlideItem from "@/components/slide/slideItem"
+import SlideItem from "@/components/slide/slide-item"
 
 export default function Home() {
   return (
