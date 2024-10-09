@@ -1,8 +1,10 @@
 import Link from "next/link"
 import MealsGrid from "@/components/meals/meals-grid"
 import styles from "@/styles/meals/meals-main.module.css"
+import getMeals from "@/lib/meals"
 
-const MealsPage = () => {
+const MealsPage = async () => {
+  const meals = await getMeals()
   return (
     <>
       <header className={styles.header}>
@@ -16,7 +18,7 @@ const MealsPage = () => {
         </p>
       </header>
       <section className={styles.main}>
-        <MealsGrid meals={[]} />
+        <MealsGrid meals={meals} />
       </section>
     </>
   )
