@@ -1,9 +1,12 @@
-import Link from "next/link"
-import MealsGrid from "@/components/meals/meals-grid"
-import styles from "@/styles/meals/meals-main.module.css"
-import getMeals from "@/lib/meals"
 import { Suspense } from "react"
+
+import Link from "next/link"
+
+import MealsGrid from "@/components/meals/meals-grid"
+import getMeals from "@/lib/get-meals"
 import Loading from "./loading-meals"
+
+import styles from "@/styles/meals/meals-main.module.css"
 
 const Meals = async () => {
   const meals = await getMeals()
