@@ -1,17 +1,17 @@
 import Link from "next/link"
 import HeaderBackground from "./headerBackground"
 import Logo from "@/assets/logo.png"
-import "@/styles/header/header.css"
+import styles from "@/styles/header/header.module.css"
 
 const Header = () => {
   return (
-    <header className="header">
+    <header className={styles.header}>
       <HeaderBackground />
-      <Link className="logo" href="/">
+      <Link className={styles.logo} href="/">
         <img src={Logo.src} />
         Header
       </Link>
-      <nav className="nav">
+      <nav className={styles.nav}>
         <ul>
           <li>
             <Link href="/meals">Meals</Link>
