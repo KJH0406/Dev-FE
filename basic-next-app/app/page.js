@@ -1,11 +1,14 @@
 import Link from "next/link"
 import "@/styles/page.css"
+import SlideItem from "@/components/slide/slideItem"
 
 export default function Home() {
   return (
     <>
       <header className="header">
-        <div className="slideshow"></div>
+        <div className="slideshow">
+          <SlideItem />
+        </div>
         <div>
           <div className="hero">
             <h1>요리 백과사전</h1>
