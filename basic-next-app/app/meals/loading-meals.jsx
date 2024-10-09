@@ -1,4 +1,4 @@
-import styles from "@/styles/loading.module.css"
+import styles from "@/styles/meals/loading-meals.module.css"
 
 const Loading = () => {
   return <p className={styles.loading}>로딩 중...</p>
