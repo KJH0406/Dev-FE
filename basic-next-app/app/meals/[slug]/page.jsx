@@ -1,9 +1,14 @@
+import Image from "next/image"
+import { notFound } from "next/navigation"
 import { getMeal } from "@/lib/get-meals"
 import styles from "@/styles/meals/meal-detail-page.module.css"
-import Image from "next/image"
 
 const MealDetailPage = ({ params }) => {
   const meal = getMeal(params.slug)
+
+  if (!meal) {
+    notFound()
+  }
 
   meal.instructions = meal.instructions.replace(/\n/g, "<br />")
   return (
