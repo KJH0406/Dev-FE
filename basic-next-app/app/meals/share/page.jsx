@@ -1,5 +1,6 @@
 import styles from "@/styles/share/share-meal-page.module.css"
 import ImagePicker from "@/components/meals/image-picker"
+import { shareMeal } from "@/lib/action"
 
 const ShareMealPage = () => {
   return (
@@ -12,7 +13,7 @@ const ShareMealPage = () => {
         <p>혹은 공유할만한 다른 음식을 알려주세요!</p>
       </header>
       <main className={styles.main}>
-        <form className={styles.form}>
+        <form className={styles.form} action={shareMeal}>
           <div className={styles.row}>
             <p>
               <label htmlFor="name">이름</label>
@@ -40,7 +41,7 @@ const ShareMealPage = () => {
               required
             ></textarea>
           </p>
-          <ImagePicker />
+          <ImagePicker label="Pick image" name="image" />
           <p className={styles.actions}>
             <button type="submit">음식 공유하기</button>
           </p>
