@@ -3,7 +3,7 @@ import { Suspense } from "react"
 import Link from "next/link"
 
 import MealsGrid from "@/components/meals/meals-grid"
-import getMeals from "@/lib/get-meals"
+import { getMeals } from "@/lib/get-meals"
 import Loading from "./loading-meals"
 
 import styles from "@/styles/meals/meals-main.module.css"
