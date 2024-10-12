@@ -1,4 +1,5 @@
 import styles from "@/styles/share/share-meal-page.module.css"
+import ImagePicker from "@/components/meals/image-picker"
 
 const ShareMealPage = () => {
   return (
@@ -39,7 +40,7 @@ const ShareMealPage = () => {
               required
             ></textarea>
           </p>
-          이미지 선택
+          <ImagePicker />
           <p className={styles.actions}>
             <button type="submit">음식 공유하기</button>
           </p>
