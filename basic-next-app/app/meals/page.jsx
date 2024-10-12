@@ -8,6 +8,11 @@ import Loading from "./loading-meals"
 
 import styles from "@/styles/meals/meals-main.module.css"
 
+export const metadata = {
+  title: "All Meals",
+  description: "맛난 음식 잔뜩 보기",
+}
+
 const Meals = async () => {
   const meals = await getMeals()
   return <MealsGrid meals={meals} />
