@@ -1,5 +1,8 @@
 "use server"
 
+import { redirect } from "next/navigation"
+import { saveMeal } from "./get-meals"
+
 const shareMeal = async (formData) => {
   const meal = {
     title: formData.get("title"),
@@ -9,7 +12,8 @@ const shareMeal = async (formData) => {
     creator: formData.get("name"),
     creator_email: formData.get("email"),
   }
-  return meal
+  await saveMeal(meal)
+  redirect("/meals")
 }
 
 export { shareMeal }
