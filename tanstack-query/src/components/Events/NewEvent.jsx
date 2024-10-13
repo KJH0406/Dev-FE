@@ -17,7 +17,7 @@ export default function NewEvent() {
     // 요청이 성공적일 때 실행할 함수
     onSuccess: () => {
       // 새로운 이벤트가 생성되었을 때, 기존에 가져온 데이터가 만료되었으니 다시 신규로 가져와야함을 요청함.
-      queryClient.invalidateQueries()
+      queryClient.invalidateQueries({ queryKey: ["events"] })
       navigate("/events")
     },
   })
