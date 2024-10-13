@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom"
 import Modal from "../UI/Modal.jsx"
 import EventForm from "./EventForm.jsx"
 import { useMutation } from "@tanstack/react-query"
-import { createNewEvent } from "../../util/http"
+import { createNewEvent, queryClient } from "../../util/http"
 import ErrorBlock from "../UI/ErrorBlock"
 
 export default function NewEvent() {
@@ -13,6 +13,13 @@ export default function NewEvent() {
   const { mutate, isPending, isError, error } = useMutation({
     // Fn: 실행 함수
     mutationFn: createNewEvent,
+
+    // 요청이 성공적일 때 실행할 함수
+    onSuccess: () => {
+      // 새로운 이벤트가 생성되었을 때, 기존에 가져온 데이터가 만료되었으니 다시 신규로 가져와야함을 요청함.
+      queryClient.invalidateQueries()
+      navigate("/events")
+    },
   })
 
   function handleSubmit(formData) {
